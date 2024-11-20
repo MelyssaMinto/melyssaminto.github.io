@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Page Template</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <section id ="home">
+        <header>
+            <h1>mintOmics Blog</h1>
+        
+
+            <nav>
+                <div class="menu-icon" onclick="toggleMenu()">
+                    &#9776; <!-- Hamburger icon -->
+                </div>
+                <div class="nav-links">
+                    <a href="../index.html">Home</a> 
+                    <a href="../blog.html">Blog</a> 
+                    <a href="../index.html#projects">Projects</a> 
+                    <a href="../index.html#publications">Publications</a> 
+                </div>
+            </nav>
+        </header>
+    
+    </section>
+
+<article>
+   
+        <h1 class ="post-header">Getting Started in Bioinformatics</h1>
+        <p class="post-meta">Published on <span>November 19, 2024</span> by <span>Melyssa Minto</span></p>
+   
+      
+      <section class="post-content">
+        <h2>Getting Started</h2>
+        <p>To get started you will need to get familiar with the command line (aka shell or bash) and either R or Python. I have used R mainly so my recommendations will be biased towards R. See [Sanbiomics](https://www.youtube.com/@sanbomics/featured) for Python advice. Below I will outline the typical analysis steps when analyzing omics data and highlight which tools you can use to do them. Again, these are my recommendations and there are other ways/tools to accomplish these steps</p>
+        
+        <h2>Basic sequencing/bioinformatics analytics pipeline</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Step</th>
+                    <th>Language</th>
+                    <th>Tool</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>download data/fastqs</td>
+                    <td><code>shell</code></td>
+                    <td><a href="https://hpc.nih.gov/apps/sratoolkit.html" target="_blank">sra fastq dump</a> (if published) or download for sequencing core. It is really important for data quality purposes you <strong>DO NOT</strong> change the filenames.</td>
+                </tr>
+                <tr>
+                    <td>align fastqs to reference genome</td>
+                    <td><code>shell</code></td>
+                    <td>
+                        <a href="https://bowtie-bio.sourceforge.net/index.shtml" target="_blank">bowtie</a> for DNAse, 
+                        <a href="https://bowtie-bio.sourceforge.net/bowtie2/index.shtml" target="_blank">bowtie2</a> for any other chromatin based assays (i.e. ChIP-seq), 
+                        <a href="https://github.com/alexdobin/STAR" target="_blank">STAR</a> for RNA-seq
+                    </td>
+                </tr>
+                <tr>
+                    <td>Call Peaks (for chromatin based assays)</td>
+                    <td><code>shell</code> / <code>R</code></td>
+                    <td>
+                        <a href="https://hbctraining.github.io/Intro-to-ChIPseq/lessons/05_peak_calling_macs.html" target="_blank">MACS2</a> for ChIP-seq, 
+                        <a href="https://github.com/FredHutch/SEACR" target="_blank">seacr</a> for CUTNRUN
+                    </td>
+                </tr>
+                <tr>
+                    <td>Extract RNA-seq Counts or Chromatin-based assay reads under peaks</td>
+                    <td><code>shell</code> / <code>R</code></td>
+                    <td>
+                        <a href="https://htseq.readthedocs.io/en/latest/" target="_blank">HTSeq</a> or 
+                        <a href="https://www.bioconductor.org/packages/release/workflows/vignettes/rnaseqDTU/inst/doc/rnaseqDTU.html" target="_blank">salmon</a> R package for RNA-seq, 
+                        <a href="https://bioconductor.org/packages/devel/bioc/vignettes/Rsubread/inst/doc/SubreadUsersGuide.pdf" target="_blank">Rsubreads::featureCounts()</a> for chromatin based assays
+                    </td>
+                </tr>
+                <tr>
+                    <td>perform QC & filtering</td>
+                    <td><code>shell</code> / <code>R</code></td>
+                    <td>
+                        <ul>
+                            <li>look for batch effects</li>
+                            <li>Are there higher or lower sequencing depth on specific sequencing days or library prep days?</li>
+                            <li>Are there any outliers?</li>
+                        </ul>
+                        <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/" target="_blank">FastQC</a> for QC check of fastq files. For the extracted reads, create several plots looking at sequencing depth’s relationship to genomic metadata like library prep days, sequencing days, and sample groups.
+                    </td>
+                </tr>
+                <tr>
+                    <td>Differential analysis</td>
+                    <td><code>R</code></td>
+                    <td>
+                        <a href="https://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html" target="_blank">DESeq2</a> for many types of genomic data, 
+                        <a href="https://bioconductor.org/packages/release/bioc/html/DiffBind.html" target="_blank">diffbind</a> for chromatin based assays
+                    </td>
+                </tr>
+                <tr>
+                    <td>Map peaks to nearest genes</td>
+                    <td><code>R</code></td>
+                    <td>
+                        <a href="https://bioconductor.org/packages/devel/bioc/vignettes/ChIPseeker/inst/doc/ChIPseeker.html" target="_blank">ChIPseeker</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Enrichment testing for differential genes or genes near differential peaks</td>
+                    <td><code>R</code> / web-based tools</td>
+                    <td>
+                        Most enrichment testing does a version of a fisher's exact test to look at the proportion of significant genes compared to the proportion of genes annotated to a specific pathway or GO term. 
+                        <a href="https://bioconductor.org/packages/release/bioc/vignettes/clusterProfiler/inst/doc/clusterProfiler.html" target="_blank">ClusterProfiler</a> for GO enrichment, KEGG pathway enrichment, Reactome pathway enrichment.
+                    </td>
+                </tr>
+                <tr>
+                    <td>TF enrichment analysis</td>
+                    <td><code>shell</code></td>
+                    <td>
+                        <a href="http://homer.ucsd.edu/homer/motif/" target="_blank">HOMER</a> or 
+                        <a href="https://meme-suite.org/meme/" target="_blank">MEME</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Gene Correlation Analysis</td>
+                    <td><code>R</code></td>
+                    <td>
+                        <a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-9-559" target="_blank">WGCNA</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>After all your analyses are done you pour over your genes and make connections and interpret data</p>
+        <iframe src="https://giphy.com/embed/l0IykOsxLECVejOzm" justify-content=center width="480" height="302" style="" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/fx-charlie-always-sunny-l0IykOsxLECVejOzm"></a></p>
+        
+        <h2>Resources</h2>
+        <h3>Bioinformatics Tutorials/Courses</h3>
+
+        <p>This <a href="https://datacarpentry.org/lessons/#genomics-workshop">Data Carpentries Genomics Curriculum</a> course is taught to the incoming UPGG Students every year. IMO, these modules are the most important:</p>
+        <ul>
+            <li><a href="https://datacarpentry.org/shell-genomics/">Intro to Command Line for Genomics</a></li>
+            <li><a href="https://datacarpentry.org/wrangling-genomics/">Data Wrangling and Processing for Genomics</a></li>
+        </ul>
+    
+        <p><strong><a href="https://github.com/quinlan-lab/applied-computational-genomics#applied-computational-genomics-course-at-uu-spring-2022">Applied Computational Genomics Course at UU: Spring 2022</a></strong>. Taught by a bioinformatics legend. I find his raw genomic data processing content very insightful. This includes:</p>
+        <ul>
+            <li><a href="https://docs.google.com/presentation/d/1N0DO5rlHdbrnNhyDhib8fpYYhfbtFOPcKw_Bpvv-2lA/edit?usp=sharing">Feb 10, 2022: FASTQ format and tools (slides)</a></li>
+            <li><a href="https://docs.google.com/presentation/d/1RskyGhXx4Lc6wSvvb_ZuCUJGUiP2RAr9X8bGh9Kz77I/edit?usp=sharing">Feb 15, 2022: Sequence mapping and alignment (slides)</a>, <a href="https://youtu.be/QuuKYEp5EUA">youtube</a></li>
+            <li><a href="https://docs.google.com/presentation/d/1_iT3btOZqjPmVb8Ryk5ssMBCMxoQ0MVmasZ6G0luA-c/edit?usp=sharing">Feb 17, 2022: Sequence alignment and SAM/BAM format samtools, and IGV (slides)</a>, <a href="https://www.youtube.com/watch?v=XU8atPxM0VQ">youtube</a></li>
+            <li><a href="https://docs.google.com/presentation/d/1_iT3btOZqjPmVb8Ryk5ssMBCMxoQ0MVmasZ6G0luA-c/edit?usp=sharing">Feb 22, 2022: Samtools and IGV (slides)</a>, <a href="https://www.youtube.com/watch?v=XU8atPxM0VQ">youtube</a></li>
+            <li><a href="https://docs.google.com/presentation/d/1KMVLhMSqTPcsRkflvNFif6xCp_lnkAF_V73S61b0DyY/edit?usp=sharing">March 1, 2022: Uncertainty in RNA-seq data (slides)</a>, <a href="https://youtu.be/xItNEtQvYaU">youtube</a></li>
+        </ul>
+    
+        <p><a href="https://rafalab.dfci.harvard.edu/pages/harvardx.html">HarvardX Biomedical Data Science Open Online Training</a>. This is a really good front to back course on bioinformatics. I would focus on:</p>
+        <ul>
+            <li><a href="https://www.edx.org/course/statistics-r-harvardx-ph525-1x-0">Statistics and R</a></li>
+            <li><a href="https://www.edx.org/course/statistical-inference-modeling-high-harvardx-ph525-3x-0">Statistical Inference and Modeling for High-throughput Experiments (Week 1-3)</a></li>
+            <li><a href="https://www.edx.org/course/high-dimensional-data-analysis-harvardx-ph525-4x-0">High-Dimensional Data Analysis</a></li>
+            <li><a href="https://www.edx.org/course/introduction-bioconductor-annotation-harvardx-ph525-5x-0">Introduction to Bioconductor: Annotation and Analysis of Genomes and Genomic Assays (Week 1 and Week 4)</a></li>
+            <li><a href="https://www.edx.org/course/case-studies-functional-genomics-harvardx-ph525-7x-0">Case Studies in Functional Genomics</a></li>
+        </ul>
+
+        <h3>Bioinformatics YouTube Channels</h3>
+        <ul>
+            <li><a href="https://www.youtube.com/@Bioinformagician">Bioinformagician</a>
+                <ul>
+                    <li><a href="https://youtu.be/lG11JjovJHE?si=YRhd9VHllbaaBQT-">Setup RNA-seq pipeline</a></li>
+                    <li><a href="https://www.youtube.com/watch?v=2RFYKTvCXHs&list=PLJefJsd1yfhbIhblS-85alaFsPdU00DaA">Bioinformatics 101 Playlist</a>
+                        <ul>
+                            <li><a href="https://youtu.be/2RFYKTvCXHs?si=DxcwdR-h9SgO9fh8">How to download RNA-seq data from NCBI GEO</a></li>
+                            <li><a href="https://youtu.be/zE851fWCYQg?si=5o9K1yqLS6Govhld">How to download data from NCBI SRA</a></li>
+                            <li><a href="https://youtu.be/GM6MCBkVNtQ?si=euU0wuOINWEExKbV">How to install packages in R</a></li>
+                            <li><a href="https://youtu.be/1jxDv6qVmLQ?si=y3dzFIH0UtqhqgZ8">What is sequencing depth?</a></li>
+                            <li><a href="https://youtu.be/RukuTtiY4Sg?si=hxZntR6dAL3z9jmV">Visualize gene expression data in R</a></li>
+                            <li><a href="https://youtu.be/cWe359VnfaY?si=a7QDXheerJBE1cRs">How to convert Ensembl IDs to gene symbols</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="https://youtu.be/OzNzO8qwwp0?si=X6g62S2hsn9IfIVp">DESeq2 Workflow</a></li>
+                    <li><a href="https://youtu.be/gYE59uEMXT4?si=AUMrB3K6oABIyhRJ">WGCNA Workflow (part 1)</a></li>
+                    <li><a href="https://youtu.be/mzXIxjPr_Mc?si=0G6WkFJI3QiGxK23">WGCNA Workflow (part 2)</a></li>
+                </ul>
+            </li>
+        
+            <li><a href="https://www.youtube.com/@chatomics">Chatomics</a>
+                <ul>
+                    <li><a href="https://youtu.be/Gc-Hzvt7KVQ?si=NsDPUC4xEOoCPJMH">Bulk RNA-seq analysis</a></li>
+                    <li><a href="https://youtu.be/-FSMzMD97G0?si=bpEj6sEpVsfn9tmI">Single cell RNA-seq analysis</a></li>
+                </ul>
+            </li>
+        
+            <li><a href="https://www.youtube.com/@statquest">StatQuest</a>
+                <ul>
+                    <li><a href="https://youtu.be/0oc49DyA3hU?si=t3XFBzUdgjX2HSkf">Hypothesis Testing</a></li>
+                    <li><a href="https://youtu.be/vemZtEM63GY?si=0isCgutfbKSkPIll">p-values: what they are and how to interpret them</a></li>
+                    <li><a href="https://youtu.be/K8LQSvtjcEo?si=yK_rCW4JzzJIn-hP">False Discovery Rate</a></li>
+                    <li><a href="https://youtu.be/Rsc5znwR5FA?si=RxZMDQPe8PQncLwg">Statistical Power</a></li>
+                    <li><a href="https://youtu.be/LoocDAbgwlM?si=O_veZw3rP5hEuA_h">Design Matrices For Linear Models</a></li>
+                    <li><a href="https://youtu.be/tlf6wYJrwKY?si=7t9a-FTeGWQIKLhu">Gentle Introduction to RNA-seq</a></li>
+                    <li><a href="https://youtu.be/TTUrtCY2k-w?si=YwmfjlsSWfjV_lly">RPKM, FPKM, and TPM</a></li>
+                    <li><a href="https://youtu.be/UFB993xufUU?si=xkKfXu2qPX1fGvWO">DESeq2 - Library Normalization</a></li>
+                    <li><a href="https://youtu.be/Gi0JdrxRq5s?si=WmI29eRF89ZD4XAy">DESeq2 - Independent Filtering</a></li>
+                    <li><a href="https://youtu.be/eN0wFzBA4Sc?si=vJ7lv1uhixYyruij">UMAP Dimension Reduction</a></li>
+                    <li><a href="https://youtu.be/FgakZw6K1QQ?si=NCwKnjeE_VFgnhfP">Principal Component Analysis</a></li>
+                    <li><a href="https://youtu.be/7xHsRkOdVwo?si=2xvlIrOT2EPF06jm">Hierarchal Clustering</a></li>
+                    <li><a href="https://www.youtube.com/playlist?list=PLblh5JKOoLUJo2Q6xK4tZElbIvAACEykp">High throughput sequencing playlist</a></li>
+                </ul>
+            </li>
+        
+            <h3>Bioinformatics Books</h3>
+            <li><a href="https://www.youtube.com/@JEFworks">Prof. Jean Fan</a> - She does live coding sessions which I find to be very helpful for realistic coding. But she mainly focuses on spatial transcriptomics.</li>
+            
+            <li><a href="https://www.youtube.com/watch?v=O9J9DZFEGQQ&list=PL9qLtkRkGWLflJ0fraL-fW9vYJ8SZLpF1">Duke’s computational biology reading group playlist</a> on the Duke Center for Computational Thinking. This whole playlist is live coding and they have an R package with code and data to walk through each tutorial.</li>
+        </ul>
+
+        <ul>
+            <li><a href="https://vincebuffalo.com/book/">Bioinformatic Data Skills</a> 
+                (Official Website: <a href="https://vincebuffalo.com/book/">here</a>, 
+                Online PDF: <a href="https://github.com/Kur1sutaru/bioinformatics-data-skills/blob/main/book-bioinformatics-data-skills.pdf">here</a>) 
+                - good all around
+            </li>
+            <li><a href="https://web.stanford.edu/class/bios221/book/#physical-copy">Modern Statistics for Modern Biology</a> - great for stats concepts</li>
+            <li><a href="https://liulab-dfci.github.io/bioinfo-combio/">Computational Biology</a> - good all around for concepts and code</li>
+        </ul>
+        
+
+
+       
+ 
+
+</article>
+      
+      
+        
+
+
+<!-- Footer Section -->
+<footer>
+    <div class="footer-content">
+        <p>Connect with me:</p>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/melyssaminto/" target="_blank">LinkedIn</a>
+            <a href="https://bsky.app/profile/melyssaminto.bsky.social" target="_blank">BlueSky</a>
+            <a href="https://orcid.org/0000-0002-5438-7285" target="_blank">ORCID</a>
+            <a href="https://github.com/MelyssaMinto" target="_blank">GitHub</a>
+            <a href="https://scholar.google.com/citations?user=4_3eFXcAAAAJ&hl=en" target="_blank">Goolgle Scholar</a>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

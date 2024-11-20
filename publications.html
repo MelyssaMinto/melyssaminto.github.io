@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publications - Melyssa Minto</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+    <h1>Dr. Minto's Publications</h1>
+    
+</header>
+
+<nav>
+    <a href="index.html">Home</a> |
+    <a href="projects.html">Projects</a> |
+    <a href="publications.html">Publications</a> |
+    <a href="blog.html">Blog</a> |
+    <a href="contact.html">Contact</a>
+</nav>
+
+<section id="publications">
+    <!-- Filter Buttons -->
+    <div class="filter-buttons">
+        <button onclick="filterPublications('all')">All</button>
+        <button onclick="filterPublications('Genomics')">Genomics</button>
+        <button onclick="filterPublications('Neurobiology')">Neurobiology</button>
+        <button onclick="filterPublications('Multi-omics')">Multi-omics</button>
+        <button onclick="filterPublications('Machine Learning')">Machine Learning</button>
+        <button onclick="filterPublications('DNA Methylation')">DNA Methylation</button>
+        <button onclick="filterPublications('Transcriptomics')">Transcriptomics</button>
+        <button onclick="filterPublications('Epigenomics')">Epigenomics</button>
+        <button onclick="filterPublications('Gene Regulatory Networks')"> Gene Regulatory Networks</button>
+        <!-- Add more filter buttons as needed -->
+    </div>
+
+    <!-- Publication Items -->
+    <div class="publication-grid">
+        <div class="publication-item" data-tags="Genomics Transcriptomics Neurobiology">
+            
+            <h3> <a href="https://www.nature.com/articles/s41380-024-02777-1" target="_blank">Gene expression differences associated with alcohol use disorder in human brain</a></h3>
+            <p><strong>Authors:</strong>Caryn L. Willis, Julie D. White, <u>Melyssa S. Minto</u> et al</p>
+            <p><strong>Year:</strong> 2024</p>
+            <p>Brief description of the research and findings.</p>
+            <div class="tags">
+                <span>Genomics</span>
+                <span>Transcriptomics</span>
+                <span>Neurobiology</span>
+            </div>
+        </div>
+
+        <div class="publication-item" data-tags="Neurobiology DNA Methylation">
+            <h3><a href="https://www.sciencedirect.com/science/article/pii/S2667174324000880?via%3Dihub" target="_blank">Alcohol Use Disorder-Associated DNA Methylation in the Nucleus Accumbens and Dorsolateral Prefrontal Cortex </a></h3>
+            <p><strong>Authors:</strong>Julie D. White, <u>Melyssa S. Minto</u> et. al.</p>
+            <p><strong>Year:</strong> 2024</p>
+            <p>Created a cost efficient compute cluster using AWS EC2 and Docker to execute parallelized statistical testing, analyzing DNA methylation for ~760,000 CpGs across ~120 individuals across two brain regions to efficiently determine tissue-specific and -shared DNA methylation differences in decedents diagnosed with alcohol use disorder.</p>
+            <div class="tags">
+                <span>Genomics</span>
+                <span>DNA Methylation</span>
+                <span>Neurobiology</span>
+                <span>Epigenomics</span>
+            </div>
+        </div>
+
+        <div class="publication-item" data-tags="Neurobiology Multi-omics Gene Regulatory Networks Epigenomics">
+            <h3><a href="https://bmcbiol.biomedcentral.com/articles/10.1186/s12915-024-01989-9" target="_blank">Bioinformatic Investigation of the Zic1/2 binding reveals novel co-factors in Zic-mediated gene regulation in the cerebellum </a></h3>
+            <p><strong>Authors:</strong> <u>Melyssa S. Minto</u> et. al.</p>
+            <p><strong>Year:</strong> 2024</p>
+            <p>Developed  integrative multi-omic workflow to analyze and interpret gene expression and chromatin data. Used chromatin data to determine regulatory regions around induced genes as a search space for transcription factor (TF) binding. Cross-validated enriched transcription factor motifs with transcriptional enrichment to determine putative TFs regulating neuronal plasticity in a stimulus dependent manner. </p>
+            <div class="tags">
+                <span>Multi-omics</span>
+                <span>Gene Regulatory Networks</span>
+                <span>Neurobiology</span>
+                <span>Epigenomics</span>
+            </div>
+        </div>
+
+        <div class="publication-item" data-tags="Neurobiology Multi-omics Epigenomics">
+            <h3><a href="https://elifesciences.org/articles/86273" target="_blank">Bidirectional regulation of postmitotic H3K27me3 distributions underlie cerebellar granule neuron maturation dynamics </a></h3>
+            <p><strong>Authors:</strong> Vijyendra Ramesh, Fang Liu, <u>Melyssa S. Minto</u> et. al.</p>
+            <p><strong>Year:</strong> 2024</p>
+            <p>Conducted time-course analysis of ChIP-seq of two histone modifications in the developing cerebellum. Leveraged enrichment analyses including GO and GSEA toeEstablished that histone markers H3K27ac and H3K27me3 in the developing cerebellum tend to regulate the same gene pathways but at different genomic regions. </p>
+            <div class="tags">
+                <span>Multi-omics</span>
+                <span>Neurobiology</span>
+                <span>Epigenomics</span>
+            </div>
+        </div>
+
+        <div class="publication-item" data-tags="Neurobiology Multi-omics Epigenomics">
+            <h3><a href="http://www.nature.com/articles/s41380-022-01466-1" target="_blank">Cell-type specific transcriptional adaptations of nucleus accumbens interneurons to amphetamine. </a></h3>
+            <p><strong>Authors:</strong> David Gallegos, <u>Melyssa S. Minto</u> et. al.</p>
+            <p><strong>Year:</strong> 2024</p>
+            <p> </p>
+            <div class="tags">
+                <span>Multi-omics</span>
+                <span>Neurobiology</span>
+                <span>Epigenomics</span>
+            </div>
+        </div>
+
+
+        <!-- Repeat for additional publications -->
+    </div>
+</section>
+
+<!-- Footer Section -->
+<footer>
+    <div class="footer-content">
+        <p><a href="https://scholar.google.com/citations?user=4_3eFXcAAAAJ&hl=en" target="_blank">View all on Google Scholar</a></p>
+        <p>Connect with me:</p>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/melyssaminto/" target="_blank">LinkedIn</a>
+            <a href="https://bsky.app/profile/melyssaminto.bsky.social" target="_blank">Bluesky</a>
+            <a href="https://orcid.org/0000-0002-5438-7285" target="_blank">ORCID</a>
+        </div>
+    </div>
+</footer>
+
+
+<script>
+    function filterPublications(tag) {
+        const items = document.querySelectorAll('.publication-item');
+        
+        items.forEach(item => {
+            // Show all items if "all" is selected
+            if (tag === 'all') {
+                item.style.display = 'block';
+            } else {
+                // Check if the item has the selected tag
+                if (item.getAttribute('data-tags').includes(tag)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
