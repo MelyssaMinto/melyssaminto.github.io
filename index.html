@@ -92,10 +92,46 @@
         <div class="carousel-wrapper">
 
             <a href="blogs/getting_started_in_comp_bio.html" class="blog-item">
-                <h3>Getting started in Bioinfomatics</h3>
+                <h3>Getting started in Bioinformatics</h3>
                 <p><strong>Date:</strong> Nov 18, 2024</p>
                 <p> I've curated a comprehensive reading list featuring a mix of online tutorials, instructional videos, and essential books that provide valuable insights into bioinformatics concepts. This collection is designed to help both beginners and seasoned professionals deepen their understanding of bioinformatics techniques and tools, making it easier to navigate the complexities of genomic data analysis. </p>
             </a>
+            <a href="https://www.blackwomencompbio.org/podcast/episode/39c3e3ad/blackincompbio-or-from-internships-to-innovations-exploring-computational-modeling-feat-stacey-finley-usc" class="blog-item">
+                <h3>#BlackInCompBio | From Internships to Innovations: Exploring Computational Modeling feat. Stacey Finley (USC)</h3>
+                <p><strong>Date:</strong> Aug 5, 2024</p>
+                <p>Jenea and Melyssa discuss Dr. Finley's journey into professorship as a computational researcher/mathematical biologist. They explore her path from internships to groundbreaking innovations in computational modeling in biology.</p>
+            </a>
+            <a href="https://www.blackwomencompbio.org/podcast/episode/1f03a449/cafe-chat-or-thoughts-on-conference-diversity-belonging-and-accessibility" class="blog-item">
+                <h3>Cafe Chat | Thoughts on Conference Diversity, Belonging, & Accessibility</h3>
+                <p><strong>Date:</strong> Jun 5, 2024</p>
+                <p>Jenea and Melyssa discuss opportunities and experiences attending conferences from the perspective of diversity, belonging, and accessibility, highlighting key aspects that impact inclusion and participation.</p>
+            </a>
+
+            <!-- <a href="https://www.blackwomencompbio.org/podcast/episode/1b9695ca/cafe-chat-or-picking-a-healthy-work-environment-as-a-computational-biologist" class="blog-item">
+                <h3>Cafe Chat | Picking a Healthy Work Environment as a Computational Biologist</h3>
+                <p><strong>Date:</strong> May 6, 2024</p>
+                <p>Melyssa and Jenea discuss qualities of a work environment that is healthy and supportive for their growth as computational biologists.</p>
+            </a>
+             -->
+
+            <a href="https://www.blackwomencompbio.org/podcast/episode/1a9e46ca/creating-a-compbio-portfolio-with-figure-one-lab-feat-dean-lee" class="blog-item">
+                <h3>Creating a CompBio Portfolio with Figure One Lab feat. Dean Lee</h3>
+                <p><strong>Date:</strong> Published on: April 10, 2024</p>
+                <p>In this episode, Melyssa and Jenea interview Dean Lee (Novartis) about his initiative Figure One Lab, which helps people build a computational biology (compbio) portfolio by re-enacting Figure 1 of biology papers. They discuss key insights for using storytelling to land computational biology roles in biotech and pharma.</p>
+            </a>
+
+            <a href="https://www.blackwomencompbio.org/podcast/episode/21cff7eb/cafe-chat-or-keeping-up-with-compbio" class="blog-item">
+                <h3>Cafe Chat | Keeping Up with CompBio</h3>
+                <p><strong>Date:</strong> March 11, 2024</p>
+                <p>Melyssa and Jenea discuss how they keep up with computational biology through social media, conferences, and the literature.</p>
+            </a>
+            
+            <a href="https://www.blackwomencompbio.org/podcast/episode/22cdf4e0/blackincompbio-or-which-skills-do-bioinformaticians-need-to-transition-into-data-science-feat-aneesa-valentine-ms" class="blog-item">
+                <h3>BlackInCompBio | Which Skills Do Bioinformaticians Need to Transition Into Data Science? feat. Aneesa Valentine, MS</h3>
+                <p><strong>Date:</strong> Feb 28, 2024</p>
+                <p>We talk to Aneesa Valentine, MS, about transitioning from bioinformatics to data science and AI. She shares her journey outside academia and into the world of data science and AI.</p>
+            </a>
+            
      
 
            
@@ -326,18 +362,6 @@
 
     let currentIndex = 0;
 
-//     function scrollCarousel(direction) {
-//     const wrapper = document.querySelector('#blog-posts .carousel-wrapper');
-//     const itemWidth = wrapper.offsetWidth / 3; // Width of each blog item in carousel
-//     const maxIndex = Math.ceil(wrapper.children.length / 3) - 1; // Calculate max index for 3 items per view
-
-//     // Update current index based on direction
-//     currentIndex = Math.min(maxIndex, Math.max(0, currentIndex + direction));
-//     const scrollPosition = currentIndex * itemWidth * 3;
-
-//     // Smooth scroll to new position
-//     wrapper.style.transform = `translateX(-${scrollPosition}px)`;
-// }
 
 function scrollCarousel(direction) {
     const wrapper = document.querySelector('.carousel-wrapper');
@@ -349,28 +373,6 @@ function scrollCarousel(direction) {
 }
 
 
-//     function scrollCarousel(direction) {
-//         const wrapper = document.querySelector('.carousel-wrapper');
-//         const items = document.querySelectorAll('.blog-item');
-//         const itemsPerView = window.innerWidth >= 1024 ? 3 : window.innerWidth >= 769 ? 2 : 1;
-
-//         const totalItems = items.length;
-//         const maxIndex = totalItems - itemsPerView;
-
-//         // Update the current index
-//         currentIndex += direction;
-
-//         // Clamp the index within bounds
-//         currentIndex = Math.max(0, Math.min(currentIndex, maxIndex));
-
-//         // Scroll to the selected item
-//         wrapper.style.transform = `translateX(-${currentIndex * (100 / itemsPerView)}%)`;
-//     }
-
-//     function toggleMenu() {
-//     const nav = document.querySelector('nav');
-//     nav.classList.toggle('active');
-// }
 
 function updateCarouselButtons() {
     const wrapper = document.querySelector('.carousel-wrapper');
